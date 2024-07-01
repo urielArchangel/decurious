@@ -14,7 +14,7 @@ export const eventMap:P = {"01234":{
     "setup_status":"ready",
     "event_status":"not yet started",
     "start_date":1719662341400,
-    "link":"https://127.0.0.1:3000/event/01234",
+    "link":"https://decurious.vercel.app/event/01234",
     "image":"https://images.lumacdn.com/event-covers/xa/38034827-b3cd-44f2-af18-ea4a03455185",
     "welcome_message":"hello and welcome to the best event of your life" ,   
     "days":[
