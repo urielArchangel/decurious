@@ -2,6 +2,7 @@ import React from 'react'
 import event from '@/src/core/data/event.json'
 import { ModelType } from '@/decarations'
 import Image from 'next/image'
+import QRCodeGenerator from './utils/components/QRbutton'
 
 interface EventModel{
     e:ModelType
@@ -52,7 +53,7 @@ const EventItem:React.FC<EventModel>=({e}) =>{
             </div>
         </div>
         <section className='space-y-2'>
-            <button className='block bg-grad py-2 px-4 border border-transparent rounded-lg'>Get QR code</button>
+            <QRCodeGenerator inputText={e.link} />
             <button className='block text-grad border border-[var(--de-color)] w-full py-2 rounded-lg'>Copy link</button>
         </section>
         </section>
