@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import sessions from '@/src/core/data/session.json'
 import AddSession from './AddSession'
 import Link from 'next/link'
@@ -8,6 +9,7 @@ import CreateSession from './CreateSession'
 
 
 const Days = () => {
+    const [sessionAddingInProgress,setSessionAddingInProgress]=useState(false)
   return (
     <section>
         <h3 className='text-[1.3rem]'>Day 1</h3>
@@ -19,8 +21,8 @@ const Days = () => {
         <CgChevronDown  className='text-right block mr-3' size={22} />
     </Link>
 ))}
-{/* <CreateSession /> */}
-           <AddSession />
+
+{sessionAddingInProgress?<CreateSession setSession={setSessionAddingInProgress} />:<AddSession addSession={setSessionAddingInProgress}  />}
         </section>
     </section>  )
 }

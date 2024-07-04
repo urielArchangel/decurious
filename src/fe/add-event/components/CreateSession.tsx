@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import AddSpeaker from './AddSpeaker'
 import CreateSpeaker from './CreateSpeaker'
 import { inputBoxStyle } from '../../utils/styling/TailwindTemplate'
+import {MdCancel} from 'react-icons/md'
 
-const CreateSession = () => {
+const CreateSession = ({setSession}:{setSession:React.Dispatch<SetStateAction<boolean>>}) => {
   return (
-    <section className='bg-white rounded-lg px-4 py-12'>
+    <section className='bg-white rounded-lg px-4 py-12 relative'>
+        <MdCancel className='text-black absolute top-4 right-4 cursor-pointer ' size={28} onClick={()=>{setSession(false)}}/>
 <section className='  flex items-center justify-between '>
         <div className='w-[50%] space-y-4  '>
 
@@ -43,7 +45,11 @@ const CreateSession = () => {
            <AddSpeaker />
         
         </div>
+        
     </section>
+    <section className='text-right py-2'>
+        <button className='bg-grad px-8 py-4 rounded-lg'>add session</button>
+    </section> 
 </section> )
 }
 

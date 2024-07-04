@@ -1,7 +1,18 @@
-import React from "react";
+"use client";
+import React, { useLayoutEffect } from "react";
 import Days from "./Days";
+import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation";
+import Banner from "./Banner";
 
 const AddEventForm = () => {
+  const router = useRouter();
+  const { isConnected } = useAccount();
+  useLayoutEffect(() => {
+    if (!isConnected) {
+      router.push("/");
+    }
+  });
   return (
     <form action="" className="max-w-[560px] w-full mx-auto space-y-8 px-6">
       <div>
@@ -78,23 +89,22 @@ const AddEventForm = () => {
         </div>
       </section>
       <section className="">
-        <div>
-          <label
-            htmlFor="eventBanner"
-            className="relative w-[200px] h-[200px] cursor-pointer rounded-lg flex items-center justify-center border-4 text-gray-200 border-gray-200 border-dashed"
-          >
-            <p className="">Add event banner</p>
-          </label>
-          {/* <Image /> */}
-          <input type="file" name="" id="eventBanner" hidden />
-        </div>
+        <Banner />
       </section>
       <section>
         <Days />
       </section>
       <div>
-        <label htmlFor="" className="event-details-labels">(optional) add a welcome message which attendees would see</label>
-        <textarea name="" id="welcome" className="w-full h-[100px] border border-[var(--subtext)] outline-none "> </textarea>
+        <label htmlFor="" className="event-details-labels">
+          (optional) add a welcome message which attendees would see
+        </label>
+        <textarea
+          name=""
+          id="welcome"
+          className="w-full h-[100px] border border-[var(--subtext)] outline-none "
+        >
+          {" "}
+        </textarea>
       </div>
       <div className="flex justify-end pb-4">
         <button className="h-12 rounded-lg px-6 bg-grad block">Submit</button>
