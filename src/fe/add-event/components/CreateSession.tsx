@@ -1,10 +1,12 @@
-import React, { SetStateAction } from 'react'
+'use client'
+import React, { SetStateAction, useState } from 'react'
 import AddSpeaker from './AddSpeaker'
 import CreateSpeaker from './CreateSpeaker'
 import { inputBoxStyle } from '../../utils/styling/TailwindTemplate'
 import {MdCancel} from 'react-icons/md'
 
 const CreateSession = ({setSession}:{setSession:React.Dispatch<SetStateAction<boolean>>}) => {
+    const [addSpeaker,setSpeakerAdding] = useState(false)
   return (
     <section className='bg-white rounded-lg px-4 py-12 relative'>
         <MdCancel className='text-black absolute top-4 right-4 cursor-pointer ' size={28} onClick={()=>{setSession(false)}}/>
@@ -40,9 +42,9 @@ const CreateSession = ({setSession}:{setSession:React.Dispatch<SetStateAction<bo
 <section >
         <h4 className='mt-6 mb-2'>Speakers</h4>
       
-        <div className='bg-gray-100/40 py-8 px-4 rounded-lg'>
-            <CreateSpeaker />
-           <AddSpeaker />
+        <div className='bg-gray-100/40 py-8 px-4 rounded-lg border-black border'>
+           {addSpeaker? <CreateSpeaker setSpeakerAdding = {setSpeakerAdding} />:<AddSpeaker setSpeakerAdding={setSpeakerAdding}/>}
+           
         
         </div>
         

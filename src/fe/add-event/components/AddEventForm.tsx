@@ -1,18 +1,20 @@
 "use client";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Days from "./Days";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import Banner from "./Banner";
 
 const AddEventForm = () => {
-  const router = useRouter();
-  const { isConnected } = useAccount();
-  useLayoutEffect(() => {
-    if (!isConnected) {
-      router.push("/");
-    }
-  });
+  const [startAutoSve,setAutoSaveStart]=useState(false)
+  const eventNameRef = useRef<HTMLInputElement>(null)
+  const oneDaySpanRef = useRef<HTMLInputElement>(null)
+  const multiDaySpanRef = useRef<HTMLInputElement>(null)
+  const [multipleDays,setMultipleDays]=useState(false)
+  const numberOfDaysRef = useRef<HTMLInputElement>(null)
+  const startDateRef = useRef<HTMLInputElement>(null)
+  const effectiveChange = ()=>{
+  }
   return (
     <form action="" className="max-w-[560px] w-full mx-auto space-y-8 px-6">
       <div>
@@ -20,7 +22,9 @@ const AddEventForm = () => {
           Event name
         </label>
         <input
+        ref={eventNameRef}
           type="text"
+          onChange={effectiveChange}
           className="block rounded-full w-full border border-[var(--subtext)] outline-none h-10 px-4"
           id="eventName"
         />
@@ -34,7 +38,11 @@ const AddEventForm = () => {
                 One day
               </label>
               <input
+              ref={oneDaySpanRef}
                 type="radio"
+                onChange={(e)=>{
+                  setMultipleDays(false);
+                }}
                 name="eventSpan"
                 id="oneDay"
                 defaultChecked={true}
@@ -46,6 +54,10 @@ const AddEventForm = () => {
                 Multiple days
               </label>
               <input
+              onChange={(e)=>{
+                setMultipleDays(e.currentTarget.checked);
+              }}
+              ref={multiDaySpanRef}
                 type="radio"
                 name="eventSpan"
                 id="multiDays"
@@ -54,24 +66,24 @@ const AddEventForm = () => {
             </div>
           </section>
         </div>
-        <div className="my-3">
+       {multipleDays?<div className="my-3">
           <label htmlFor="eventName" className="block event-details-labels">
             Number of days
           </label>
           <input
+          ref={numberOfDaysRef}
             type="number"
-            name=""
             id="numberOfDays"
             className="rounded-full border border-[var(--subtext)] outline-none h-10 px-4 max-w-[200px] text-center"
           />
-        </div>
+        </div>:null}
       </section>
       <section className="flex items-center justify-between flex-wrap">
         <div className="my-3">
           <label htmlFor="eventName" className="block event-details-labels">
             Event start date
           </label>
-          <input type="date" name="" id="numberOfDays" />
+          <input ref={startDateRef}  type="date" name="" id="numberOfDays" />
         </div>
         <div className="my-3">
           <label htmlFor="eventName" className="block event-details-labels">

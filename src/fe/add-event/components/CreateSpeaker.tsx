@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import { inputBoxStyle } from '../../utils/styling/TailwindTemplate'
+import { MdCancel } from 'react-icons/md'
 
-const CreateSpeaker = () => {
+const CreateSpeaker = ({setSpeakerAdding}:{setSpeakerAdding:React.Dispatch<SetStateAction<boolean>>}) => {
+
   return (
-    <section>
+    <section className='relative py-12' >
+      <MdCancel size={27} className='absolute top-0 right-4 cursor-pointer' onClick={()=>{
+         setSpeakerAdding(false)
+      }} />
     <section className='flex justify-between'>
     <div className='pr-2 space-y-4'>
         <div >
@@ -36,7 +41,9 @@ const CreateSpeaker = () => {
       <label htmlFor="">Additional description</label>
    <textarea className='block w-full h-[200px] outline-0' ></textarea>
    </div>
- 
+   <section className='text-right py-2'>
+        <button className='bg-grad px-6 py-3 rounded-lg'>add speaker</button>
+    </section> 
 </section>  )
 }
 
